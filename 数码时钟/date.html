@@ -1,0 +1,76 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题文档</title>
+</head>
+
+<body>
+	<div id="div">
+		<img src="img/0.png" id="h1" />
+		<img src="img/8.png" id="h2" />
+		时
+		<img src="img/1.png" id="m1" />
+		<img src="img/5.png" id="m2" />
+		分
+		<img src="img/0.png" id="s1" />
+		<img src="img/9.png" id="s2" />
+		秒
+	</div>
+</body>
+<script src="../public.js"></script>
+<script>
+	/* 
+		需求分析：
+			1 获取当前时间的时分秒
+			2 根据时分秒显示对应的图片，比如0小时，显示0.png
+	*/
+	showTime();
+
+	// 设置间隔定时器
+	// 语法一：
+	setInterval(showTime, 1000);
+
+	// 语法二：
+	// setInterval('showTime()',1000);
+
+	// 语法三:定时器的第三个参数是要传入定时函数的实参
+	// setInterval(showTime,1000,13);
+	function showTime(){
+		var time = new Date(); //获取当前时间
+
+		//时
+		var hours = time.getHours();
+		if (hours < 10) {
+			$id('h1').src = 'img/' + '0' + '.png';
+			$id('h2').src = 'img/' + hours + '.png';
+		} else {
+			$id('h1').src = 'img/' + parseInt(hours / 10) + '.png';
+			$id('h2').src = 'img/' + hours % 10 + '.png';
+		}
+		//分
+		var minute = time.getMinutes();
+		if (minute < 10) {
+			$id('m1').src = 'img/' + '0' + '.png';
+			$id('m2').src = 'img/' + minute + '.png';
+		} else {
+			$id('m1').src = 'img/' + parseInt(minute / 10) + '.png';
+			$id('m2').src = 'img/' + minute % 10 + '.png';
+		}
+
+		//秒
+		var second = time.getSeconds();
+		if (second < 10) {
+			$id('s1').src = 'img/' + '0' + '.png';
+			$id('s2').src = 'img/' + second + '.png';
+		} else {
+			$id('s1').src = 'img/' + parseInt(second / 10) + '.png';
+			$id('s2').src = 'img/' + second % 10 + '.png';
+		}
+	}
+
+</script>
+
+</html>

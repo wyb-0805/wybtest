@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #wrap {
+            padding-top: 30px;
+            position: relative;
+        }
+
+        #wrap .mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            display: none;
+            background: rgba(0, 0, 0, 0.1);
+            z-index:2  
+        }
+
+        #message {
+            width: 600px;
+            height: 500px;
+            margin: 0 auto;
+            position: relative;
+            border: 1px solid #cccccc;
+        }
+
+        #ul {
+            overflow-y: auto;
+            border: 1px solid #cccccc;
+            box-sizing: border-box;
+            padding: 5px;
+            width: 100%;
+            height: 465px;
+        }
+
+        #btn {
+            width: 50px;
+            display: block;
+            margin: 5px auto;
+        }
+
+        #title {
+            display: none;
+            background: white;
+            border: 1px solid #cccccc;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index:3
+        }
+
+        #title .h2 {
+            cursor: move;
+            background: #999999;
+        }
+
+        #form {
+            padding: 5px;
+        }
+
+        #form label {
+            margin: 5px;
+            display: block;
+        }
+
+        #form #send,
+        #form #close {
+            margin: 10px 5px;
+            font-size: 12px;
+        }
+
+        #form #del {
+            width: 30px;
+            height: 30px;
+            line-height: 25px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 24px;
+        }
+
+        li {
+            padding: 10px 0;
+            list-style: none;
+            overflow: hidden;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        .name {
+            float: left;
+            width: 136px;
+        }
+
+        .content {
+            width: 435px;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="mask"></div>
+        <div id="message">
+            <ul id="ul">
+                <li>
+                    <a href="#" class="name">服部平次</a>
+                    <span class="content">施工方好帖好帖然后对方会不会规范化广泛发给后台然后发给你吧v购房合同官方回复太皇太后皇太后发合同和天赋和恢复共和国</span>
+                </li>
+                <li>
+                    <a href="#" class="name">毛利兰</a>
+                    <span class="content">的部分分别发给部分发表回复功能的人发给个地方各部分韩国国内地方大师傅色粉无法v分别发给对方把登革热v规范化风格</span>
+                </li>
+                <li>
+                    <a href="#" class="name">黑羽快斗</a>
+                    <span class="content">部分的本地人个人灌灌风格豆腐干反对那天然后你没法改变的发高热发改委部分的个别地方</span>
+                </li>
+                <li>
+                    <a href="#" class="name">毛利小五郎</a>
+                    <span class="content">购房合同然后突然回家的法规的规定翻跟斗就会感觉他和他人的合法合规符合规划规划规范化符合法规和风格化规范化风格那边</span>
+                </li>
+                <li>
+                    <a href="#" class="name">工藤新一</a>
+                    <span class="content">是对方为两个加热管法定年龄告诉对方两个帝国的附属国而更让人和环境突然好卡给</span>
+                </li>
+            </ul>
+            <button id="btn">发布</button>
+        </div>
+        <div id="title">
+            <h2 class="h2">这是广告框的标题</h2>
+            <form id="form">
+                <label>
+                    <span>昵称：</span>
+                    <input type="text" id="username">
+                </label>
+                <label>
+                    <span>内容：</span>
+                    <textarea id="content" cols="30" rows="10"></textarea>
+                </label>
+                <input id="send" type="button" value="发送">
+                <input id="delt" type="button" value="关闭">
+                <input id="del" type="button" value="×"></input>
+            </form>
+        </div>
+    </div>
+    <script src="public.js"></script>
+    <script>
+        // 获取元素
+        var btn = $id('btn');
+        var ul = $id('ul');
+        var title = $id('title');
+        var send = $id('send');
+        var h2 = document.querySelector('.h2');
+        var mask = document.querySelector('.mask');
+        var username = $id('username');
+        var content = $id('content');
+        var delt = $id('delt');
+        var del = $id('del');
+        console.log(del);
+
+
+        // 点击发送按钮，在ul后面插入li节点
+        send.onclick = function () {
+            // 方法一：创建一个li节点
+            /* var li = document.createElement('li');
+            var a = document.createElement('a');
+            var span = document.createElement('span');
+            ul.insertBefore(li,ul.children[0]);
+            li.appendChild(a);
+            li.appendChild(span);
+            a.innerHTML = username.value;
+            span.innerHTML = content.value;
+            a.className = 'name';
+            span.className = 'content'; */
+
+            // 方法二：克隆一个li节点
+            var li = ul.children[0].cloneNode(true);
+            li.children[0].innerHTML = username.value;
+            li.children[1].innerHTML = content.value;
+            // ul.appendChild(li)
+            ul.insertBefore(li, ul.children[0]);
+
+            title.style.display = 'none';
+            // 如果广告框消失，mask也消失
+            mask.style.display = 'none';
+        }
+
+        // 点击发布按钮弹出广告框,显示遮挡层
+        btn.onclick = function () {
+            mask.style.display = 'block';
+            mask.style.width = window.innerWidth + 'px';
+            mask.style.height = window.innerHeight + 'px';
+            title.style.display = 'block';
+        }
+        // 拖动h2，广告框跟着移动
+        h2.onmousedown = function (e) {
+            var e = e || event;
+            var disX = e.offsetX || e.layerX;
+            var disY = e.offsetY || e.layerY;
+            console.log(disX, disY)
+            document.onmousemove = function (e) {
+                title.style.left = e.clientX + getScroll().left - disX + 'px';
+                title.style.top = e.clientY + getScroll().top - disY + 'px';
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        }
+
+        // 点击×按钮，关闭广告框
+        del.onclick = function () {
+            title.style.display = 'none';
+            // 如果广告框消失，mask也消失
+            mask.style.display = 'none';
+        }
+
+        // 点击关闭按钮，关闭广告框
+        delt.onclick = function () {
+            title.style.display = 'none';
+            // 如果广告框消失，mask也消失
+            mask.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
